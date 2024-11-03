@@ -1,0 +1,45 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f1f8fc;
+}
+
+.logo-container {
+    display: flex;
+    margin-right: 15px;
+}
+
+.logo {
+    height: 50px;
+    margin-right: 15px;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #00497c;
+    text-decoration: none;
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #1e90ff;
+}
+
+/* Styles responsives */
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header {
+        flex-direction: column;
+    }
+}
