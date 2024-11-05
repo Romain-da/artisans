@@ -63,3 +63,44 @@
     background-color: #1c7cd6;
   }
   
+  /* Espacement entre les sections */
+section {
+  margin-bottom: 40px; /* Ajoutez de l'espace entre les sections */
+}
+
+/* Espacement spécifique pour les sections d'accueil */
+h1 {
+  margin-bottom: 20px;
+}
+
+ol {
+  padding-left: 20px;
+}
+
+.artisans-section {
+  display: flex;
+  gap: 20px;
+  justify-content: center; /* Centre horizontalement les artisans */
+}
+
+/* Espacement pour chaque artisan */
+.artisan-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+  text-align: center; /* Centre le texte dans les cartes */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .artisans-section {
+      flex-direction: column;
+      align-items: center; /* Centre les artisans sur les petits écrans */
+  }
+
+  .artisan-card {
+      width: 100%; /* Prend toute la largeur disponible sur petits écrans */
+      max-width: 300px; /* Limite la largeur maximale */
+  }
+}

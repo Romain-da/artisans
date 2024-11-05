@@ -6,20 +6,24 @@ import Home from './pages/Home';
 import ArtisanList from './pages/ArtisanList';
 import ArtisanDetail from './pages/ArtisanDetail';
 import NotFound from './pages/NotFound';
+import SearchResults from './pages/SearchResults';
 
 function App() {
   return (
     <>
-      <Header />  
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/batiment" element={<ArtisanList category="Bâtiment" />} />
-        <Route path="/services" element={<ArtisanList category="Services" />} />
-        <Route path="/fabrication" element={<ArtisanList category="Fabrication" />} />
-        <Route path="/alimentation" element={<ArtisanList category="Alimentation" />} />
-        <Route path="/artisan/:id" element={<ArtisanDetail />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Header />
+      <main>  
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/batiment" element={<ArtisanList category="Bâtiment" />} />
+          <Route path="/services" element={<ArtisanList category="Services" />} />
+          <Route path="/fabrication" element={<ArtisanList category="Fabrication" />} />
+          <Route path="/alimentation" element={<ArtisanList category="Alimentation" />} />
+          <Route path="/artisan/:id" element={<ArtisanDetail />} />
+          <Route path="/search" element={<SearchResults />} /> 
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   );

@@ -1,5 +1,8 @@
 import React from 'react';
 import './Footer.css';
+import Logo from '../assets/img/Logo.png';
+import Facebook from '../assets/img/facebook.png';
+import Twitter from '../assets/img/twitter.png';
 
 function Footer() {
   return (
@@ -22,8 +25,8 @@ function Footer() {
         <div className="footer-column">
           <h4>Suivez-nous</h4>
           <div className="footer-socials">
-            <a href="#"><i className="fab fa-facebook"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
+            <a href="#"><img src={Facebook} alt='Logo facebook'></img></a>
+            <a href="#"><img src={Twitter} alt='Logo twitter'></img></a>
             <a href="#"><i className="fab fa-instagram"></i></a>
           </div>
         </div>
