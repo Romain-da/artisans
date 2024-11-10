@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ArtisanDetail.css';
 
-function ArtisanDetail() {
+function ArtisanDetail({ artisan: propArtisan }) {
   const { id } = useParams();
-  const [artisan, setArtisan] = useState(null);
-  const [showForm, setShowForm] = useState(false); // État pour afficher le formulaire
+  const [artisan, setArtisan] = useState(propArtisan || null);
+  const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -13,37 +13,37 @@ function ArtisanDetail() {
     message: ''
   });
 
+  // Charge l'artisan si l'ID change dans l'URL et si aucune prop `artisan` n'est fournie
   useEffect(() => {
-    fetch('/datas.json')
-      .then(response => response.json())
-      .then(data => {
-        const selectedArtisan = data.find(artisan => `${artisan.id}` === `${id}`);
-        setArtisan(selectedArtisan);
-      })
-      .catch(error => console.error("Erreur lors du chargement des données :", error));
-  }, [id]);
+    if (!propArtisan && id) {
+      fetch('/datas.json')
+        .then(response => response.json())
+        .then(data => {
+          const selectedArtisan = data.find(a => `${a.id}` === id);
+          setArtisan(selectedArtisan);
+        })
+        .catch(error => console.error("Erreur lors du chargement des données :", error));
+    } else if (propArtisan) {
+      // Met à jour l'artisan si `propArtisan` change
+      setArtisan(propArtisan);
+    }
+  }, [id, propArtisan]);
 
   if (!artisan) {
     return <div>Artisan non trouvé</div>;
   }
 
-  // Gestion de l'affichage du formulaire
   const handleContactClick = () => {
     setShowForm(true);
   };
 
-  // Gestion de la soumission du formulaire
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Données du formulaire:", formData);
-    // Ajoutez ici le code pour envoyer les données au backend ou par email
-
-    // Réinitialiser le formulaire et masquer après l'envoi
     setFormData({ firstName: '', lastName: '', email: '', message: '' });
     setShowForm(false);
   };
 
-  // Gestion des changements dans le formulaire
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -55,15 +55,13 @@ function ArtisanDetail() {
       </div>
       <p className="artisan-info">Catégorie : {artisan.category}</p>
       <p className="artisan-info">Spécialité : {artisan.specialty}</p>
+      <p className="artisan-info">À propos : {artisan.about}</p>
+      <p className="artisan-info">Site internet : <a href={artisan.website} target='_blank' rel='noopener noreferrer'>{artisan.website}</a></p>
       <p className="artisan-info">Note : {artisan.note}</p>
       <p className="artisan-info">Localisation : {artisan.location}</p>
 
-      {/* Bouton de contact */}
-      <button onClick={handleContactClick} className="contact-button">
-        Contacter
-      </button>
+      <button onClick={handleContactClick} className="contact-button">Contacter</button>
 
-      {/* Formulaire de contact */}
       {showForm && (
         <form onSubmit={handleSubmit} className="contact-form">
           <h3>Formulaire de Contact</h3>

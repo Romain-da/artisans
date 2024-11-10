@@ -7,15 +7,29 @@ function SearchResults() {
     const queryParams = new URLSearchParams(location.search);
     const category = queryParams.get('category');
 
+    // Fonction pour normaliser les chaînes (suppression des accents et mise en minuscule)
+    const normalizeString = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
     useEffect(() => {
         if (category) {
+            console.log("Catégorie recherchée :", category);
             fetch('/datas.json')
                 .then((response) => response.json())
                 .then((data) => {
-                    // Filtrer les artisans par catégorie
+                    console.log("Données chargées depuis datas.json :", data);
+
+                    // Afficher toutes les catégories des artisans pour vérifier le format
+                    data.forEach(artisan => console.log("Catégorie de l'artisan:", artisan.category));
+
+                    // Normalisation de la catégorie recherchée
+                    const normalizedCategory = normalizeString(category);
+
+                    // Filtrage avec comparaison moins stricte
                     const results = data.filter(artisan =>
-                        artisan.category.toLowerCase().includes(category.toLowerCase())
+                        artisan.category && normalizeString(artisan.category).includes(normalizedCategory)
                     );
+
+                    console.log("Résultats du filtrage :", results);
                     setFilteredArtisans(results);
                 })
                 .catch(error => console.error("Erreur lors du chargement des données :", error));
@@ -29,6 +43,7 @@ function SearchResults() {
                 {filteredArtisans.length > 0 ? (
                     filteredArtisans.map(artisan => (
                         <li key={artisan.id}>
+                            {/* Utilisation de `Link` pour naviguer vers ArtisanDetail avec l'ID */}
                             <Link to={`/artisan/${artisan.id}`}>
                                 {artisan.name} - {artisan.specialty} - {artisan.location}
                             </Link>
