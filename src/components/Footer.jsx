@@ -3,6 +3,7 @@ import './Footer.css';
 import Logo from '../assets/img/Logo.png';
 import Facebook from '../assets/img/facebook.png';
 import Twitter from '../assets/img/twitter.png';
+import Instagram from '../assets/img/instagram.png';
 
 function Footer() {
   return (
@@ -25,9 +26,9 @@ function Footer() {
         <div className="footer-column">
           <h4>Suivez-nous</h4>
           <div className="footer-socials">
-            <a href="#"><img src={Facebook} alt='Logo facebook'></img></a>
-            <a href="#"><img src={Twitter} alt='Logo twitter'></img></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/?locale=fr_FR" target="_blank"><img src={Facebook} alt='Logo facebook'></img></a>
+            <a href="https://x.com/?lang=fr" target="_blank"><img src={Twitter} alt='Logo twitter'></img></a>
+            <a href="https://www.instagram.com/" target="_blank"><img src={Instagram} alt='Logo twitter'></img></a>
           </div>
         </div>
       </div>
