@@ -5,6 +5,7 @@ import './Header.css';
 
 function Header() {
     const [searchTerm, setSearchTerm] = useState('');
+    const [isNavOpen, setIsNavOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleSearch = (e) => {
@@ -14,18 +15,26 @@ function Header() {
         }
     };
 
+    const toggleNav = () => {
+        setIsNavOpen(!isNavOpen);
+    };
+
     return (
         <header className="header">
             <div className="logo-container">
-                {/* Enveloppez le logo dans un Link */}
                 <Link to="/">
                     <img src={logo} alt="Logo trouve ton artisan" className="logo" />
                 </Link>
             </div>
-            <nav className="nav">
+
+            {/* Bouton Burger pour la version mobile */}
+            <div className="burger" onClick={toggleNav}>
+                &#9776; {/* Icône burger */}
+            </div>
+
+            <nav className={`nav ${isNavOpen ? "nav-open" : ""}`}>
                 <Link to="/" className="nav-link">Accueil</Link>
                 
-                {/* Menu Déroulant pour les Catégories */}
                 <div className="dropdown">
                     <button className="dropbtn">Artisans</button>
                     <div className="dropdown-content">
@@ -36,7 +45,6 @@ function Header() {
                     </div>
                 </div>
 
-                {/* Barre de Recherche */}
                 <form onSubmit={handleSearch} className="search-form">
                     <input
                         type="text"
