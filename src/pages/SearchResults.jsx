@@ -16,8 +16,7 @@ function SearchResults() {
             fetch('/datas.json')
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log("Données chargées depuis datas.json :", data);
-
+                   
                     // Afficher toutes les catégories des artisans pour vérifier le format
                     data.forEach(artisan => console.log("Catégorie de l'artisan:", artisan.category));
 
@@ -29,7 +28,6 @@ function SearchResults() {
                         artisan.category && normalizeString(artisan.category).includes(normalizedCategory)
                     );
 
-                    console.log("Résultats du filtrage :", results);
                     setFilteredArtisans(results);
                 })
                 .catch(error => console.error("Erreur lors du chargement des données :", error));
